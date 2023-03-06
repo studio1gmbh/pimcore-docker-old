@@ -51,6 +51,8 @@ RUN set -eux; \
         dpkg -i wkhtmltox.deb; \
         rm wkhtmltox.deb; \
     \
+    apt-get install -y --no-install-recommends \
+      autoconf automake libtool nasm make pkg-config libz-dev build-essential g++ iproute2; \
     apt-get install -y openssh-client nodejs npm cifs-utils iputils-ping htop nano autoconf automake libtool m4 librabbitmq-dev;
     pecl install amqp;
     docker-php-ext-enable amqp;
