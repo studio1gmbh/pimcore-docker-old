@@ -9,15 +9,15 @@ on:
         -   cron: '30 2 * * 1,3,5'
 
 env:
-    IMAGE_NAME: pimcore/pimcore
+    IMAGE_NAME: s1kom/pimcore-test
     LATEST_TAG: v1.3
     DEV_BRANCH: 1.x
 
 jobs:
     build-php:
         name: "Build PHP images"
-        runs-on: self-hosted
-        if: github.repository == 'pimcore/docker'
+        runs-on: ubuntu-latest
+        if: github.repository == 'studio1gmbh/pimcore-docker'
         strategy:
             matrix:
                 php: [ '8.0', '8.1', '8.2' ]
