@@ -10,7 +10,7 @@ on:
 
 env:
     IMAGE_NAME: s1kom/pimcore-test
-    LATEST_TAG: v1.3
+    LATEST_TAG: v1.4-alpha
     DEV_BRANCH: 1.x
 
 jobs:
@@ -20,10 +20,10 @@ jobs:
         if: github.repository == 'studio1gmbh/pimcore-docker'
         strategy:
             matrix:
-                php: [ '8.0', '8.1', '8.2' ]
+                php: [ '8.1' ]
                 distro: [ bullseye ]
                 target: [ fpm, debug, supervisord ]
-                tag: [ '1.x', 'v1.3' ]
+                tag: [ 'v1.4-alpha' ]
 
         steps:
             -   uses: actions/checkout@v3
