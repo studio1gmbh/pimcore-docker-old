@@ -5,7 +5,7 @@ on:
     pull_request:
 
 env:
-    IMAGE_NAME: pimcore/pimcore
+    IMAGE_NAME: s1kom/pimcore
 
 jobs:
     test:
