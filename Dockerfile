@@ -51,19 +51,36 @@ RUN set -eux; \
         dpkg -i wkhtmltox.deb; \
         rm wkhtmltox.deb; \
     \
+    apt-get install -y openssh-client nodejs npm cifs-utils iputils-ping htop nano autoconf automake libtool m4 librabbitmq-dev;
+    pecl install amqp;
+    docker-php-ext-enable amqp;
+    apt-get install -y python;
+    \
     apt-get autoremove -y; \
         apt-get remove -y autoconf automake libtool nasm make cmake ninja-build pkg-config libz-dev build-essential g++; \
         apt-get clean; \
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer || true; \
     sync;
 
-RUN echo "upload_max_filesize = 100M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
-    echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
-    echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/20-pimcore.ini
+RUN echo "upload_max_filesize = 1024M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
+    echo "memory_limit = 521M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
+    echo "post_max_size = 1024M" >> /usr/local/etc/php/conf.d/20-pimcore.ini
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_MEMORY_LIMIT -1
 COPY --from=composer/composer:2-bin /composer /usr/bin/composer
+
+RUN groupadd -g 1000 app0; \
+    useradd -m -d /home/app0 app0 -u 1000 -g app0 -s /bin/bash; \
+    chown app0:app0 /home/app0;
+    
+RUN groupadd -g 1001 app1; \
+    useradd -m -d /home/app1 app1 -u 1001 -g app1 -s /bin/bash; \
+    chown app1:app1 /home/app1;
+
+RUN groupadd -g 1002 app2; \
+    useradd -m -d /home/app2 app2 -u 1002 -g app2 -s /bin/bash; \
+    chown app2:app2 /home/app2;
 
 WORKDIR /var/www/html
 
