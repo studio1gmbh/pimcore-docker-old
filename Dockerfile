@@ -65,6 +65,9 @@ RUN set -eux; \
 RUN echo "upload_max_filesize = 1024M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
     echo "memory_limit = 521M" >> /usr/local/etc/php/conf.d/20-pimcore.ini; \
     echo "post_max_size = 1024M" >> /usr/local/etc/php/conf.d/20-pimcore.ini
+    
+RUN echo "user = root" >> /usr/local/etc/php-fpm.d/zz-docker.conf; \
+    echo "group = root" >> /usr/local/etc/php-fpm.d/zz-docker.conf;
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_MEMORY_LIMIT -1
@@ -84,7 +87,7 @@ RUN groupadd -g 1002 app2; \
 
 WORKDIR /var/www/html
 
-CMD ["php-fpm"]
+CMD ["php-fpm", "--allow-to-run-as-root"]
 
 FROM pimcore_php_fpm as pimcore_php_debug
 
@@ -107,7 +110,7 @@ COPY files/entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["php-fpm", "--allow-to-run-as-root"]
 
 FROM pimcore_php_fpm as pimcore_php_supervisord
 
