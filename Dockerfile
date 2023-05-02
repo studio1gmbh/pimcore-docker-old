@@ -91,7 +91,7 @@ RUN ln -s /usr/bin/chromium /usr/bin/chromium-browser
 RUN npm uninstall node-sass
 # Download node.js in version 18 and install it (incl. dependencies)
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y gcc g++ make \
+    apt-get install -y gcc g++ make
 # Install npm and sass
 RUN apt install -y nodejs && \
     npm install -g npm && \
