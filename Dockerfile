@@ -101,7 +101,7 @@ RUN npm remove puppeteer && \
     PUPPETEER_EXECUTABLE_PATH=`which chromium-browser` PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer && \
     npm install
 # Remove installation packages that are no longer necessary
-RUN apt-get remove -y gcc g++ make g++-10 gcc-10 libgcc-10-dev libstdc++-10-dev libncurses6
+RUN apt-get remove -y gcc g++ make g++-10 gcc-10
 
 WORKDIR /var/www/html
 
