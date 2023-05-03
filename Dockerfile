@@ -100,6 +100,8 @@ RUN apt install -y nodejs && \
 RUN npm remove puppeteer && \
     PUPPETEER_EXECUTABLE_PATH=`which chromium-browser` PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer && \
     npm install
+# Remove installation packages that are not longer necessary
+RUN apt-get remove -y gcc g++ make
 
 WORKDIR /var/www/html
 
