@@ -85,6 +85,24 @@ RUN groupadd -g 1002 app2; \
     useradd -m -d /home/app2 app2 -u 1002 -g app2 -s /bin/bash; \
     chown app2:app2 /home/app2;
 
+# Soft-link Chromium browser
+RUN ln -s /usr/bin/chromium /usr/bin/chromium-browser
+# Uninstall node-sass
+RUN npm uninstall node-sass
+# Download node.js in version 18 and install it (incl. dependencies)
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y gcc g++ make
+# Install npm and sass
+RUN apt install -y nodejs && \
+    npm install -g npm && \
+    npm install sass
+# Remove puppeteer and re-install it with correct information about chromium installation
+RUN npm remove puppeteer && \
+    PUPPETEER_EXECUTABLE_PATH=`which chromium-browser` PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer && \
+    npm install
+# Remove installation packages that are no longer necessary
+RUN apt-get remove -y gcc g++ make g++-10 gcc-10
+
 WORKDIR /var/www/html
 
 CMD ["php-fpm", "--allow-to-run-as-root"]
