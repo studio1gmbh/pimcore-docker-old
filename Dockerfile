@@ -90,7 +90,7 @@ RUN ln -s /usr/bin/chromium /usr/bin/chromium-browser
 # Uninstall node-sass
 RUN npm uninstall node-sass
 # Download node.js in version 18 and install it (incl. dependencies)
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y gcc g++ make
 # Install npm and sass
 RUN apt install -y nodejs && \
@@ -100,8 +100,6 @@ RUN apt install -y nodejs && \
 RUN npm remove puppeteer && \
     PUPPETEER_EXECUTABLE_PATH=`which chromium-browser` PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer && \
     npm install
-# Remove installation packages that are no longer necessary
-RUN apt-get remove -y gcc g++ make g++-10 gcc-10
 
 WORKDIR /var/www/html
 
