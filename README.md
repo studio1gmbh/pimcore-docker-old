@@ -1,3 +1,5 @@
+# Legacy Docker Stack for Pimcore 10 projects
+
 # Pimcore PHP Docker Image
 
 This is are customized PHP Docker images specifically optimized for running [Pimcore](https://github.com/pimcore/pimcore).
