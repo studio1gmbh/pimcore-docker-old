@@ -17,13 +17,13 @@ jobs:
     build-php:
         name: "Build PHP images"
         runs-on: ubuntu-latest
-        if: github.repository == 'studio1gmbh/pimcore-docker'
+        if: github.repository == 'studio1gmbh/pimcore-docker-old'
         strategy:
             matrix:
                 php: [ '8.1' ]
                 distro: [ bullseye ]
                 target: [ fpm, debug, supervisord ]
-                tag: [ 'v1.5-beta' ]
+                tag: [ 'v1.5-delta' ]
 
         steps:
             -   uses: actions/checkout@v3
