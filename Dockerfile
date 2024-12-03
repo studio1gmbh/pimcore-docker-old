@@ -94,8 +94,8 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y gcc g++ make
 # Install npm and sass
 RUN apt install -y nodejs && \
-    npm install -g npm && \
-    npm install sass
+    npm install -g npm # && \
+#    npm install sass
 # Remove puppeteer and re-install it with correct information about chromium installation
 RUN npm remove puppeteer && \
     PUPPETEER_EXECUTABLE_PATH=`which chromium-browser` PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install puppeteer && \
