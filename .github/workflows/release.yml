@@ -10,7 +10,7 @@ on:
 
 env:
     IMAGE_NAME: s1kom/pimcore-test
-    LATEST_TAG: v1.5-delta
+    LATEST_TAG: v1.6
     DEV_BRANCH: 1.x
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
                 php: [ '8.1' ]
                 distro: [ bullseye ]
                 target: [ fpm, debug, supervisord ]
-                tag: [ 'v1.5-delta' ]
+                tag: [ 'v1.6' ]
 
         steps:
             -   uses: actions/checkout@v3
